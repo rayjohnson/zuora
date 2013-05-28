@@ -32,10 +32,10 @@ module Zuora::Objects
         :original_created_date, :original_id, :previous_subscription_id, :status,
         :subscription_end_date, :term_end_date, :version, :subscription_start_date
 
-      defaults :auto_renew          => false,
-               :initial_term        => 1,
-               :is_invoice_separate => false,
-               :renewal_term        => 0
+      #defaults :auto_renew          => false,
+      #         :initial_term        => 1,
+      #         :is_invoice_separate => false,
+      #         :renewal_term        => 0
     end
   end
 end
