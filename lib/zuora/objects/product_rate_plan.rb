@@ -2,6 +2,7 @@ module Zuora::Objects
   class ProductRatePlan < Base
     belongs_to :product
     has_many :product_rate_plan_charges
+    has_many :active_currencies
 
     validates_length_of :description, :maximum => 500, :allow_nil => true
     validates_datetime_of :effective_start_date, :effective_end_date
