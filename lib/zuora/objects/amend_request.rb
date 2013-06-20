@@ -87,7 +87,7 @@ module Zuora::Objects
             rpd.__send__(zns, :RatePlanChargeData) do |rpcd|
               rpcd.__send__(zns, :RatePlanCharge) do |rpc|
                 rpc.__send__(ons, :ProductRatePlanChargeId, charge.product_rate_plan_charge_id)
-                rpc.__send__(ons, :Quantity, charge.quantity) unless charge.quantity.price.nil?
+                rpc.__send__(ons, :Quantity, charge.quantity) unless charge.quantity.nil?
                 rpc.__send__(ons, :Price, charge.price) unless charge.price.nil?
               end
             end
