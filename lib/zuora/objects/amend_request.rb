@@ -72,6 +72,7 @@ module Zuora::Objects
 
     def generate_rate_plan_data(builder)
 
+	  if self.plans_and_charges?
       self.plans_and_charges.each do |pandc|
         rate_plan = pandc[:rate_plan]
         charges = pandc[:charges]
@@ -92,6 +93,7 @@ module Zuora::Objects
             end
           end unless charges == nil
         end
+      end
       end
     end
 
