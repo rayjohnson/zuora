@@ -76,8 +76,9 @@
                				<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime" />
 
 							<element minOccurs="0" name="EmployeeNumber__c" nillable="true" type="string" />
+							<element minOccurs="0" name="CustomerID__c" nillable="true" type="string" />
 							<element minOccurs="0" name="Office__c" nillable="true" type="string" />
-							<element minOccurs="0" name="BadApple__c" nillable="true" type="string" /><!-- user-defined enum -->
+							<element minOccurs="0" name="WriteOffFlag__c" nillable="true" type="string" /><!-- user-defined enum -->
 						</sequence>
 					</extension>
 				</complexContent>
