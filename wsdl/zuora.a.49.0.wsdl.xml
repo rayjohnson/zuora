@@ -12,6 +12,7 @@
 	targetNamespace="http://api.zuora.com/">
 	<types>
 		<schema attributeFormDefault="qualified" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://object.api.zuora.com/">
+		    <import namespace="http://api.zuora.com/" />
             <complexType name="zObject">
 				<sequence>
 					<element minOccurs="0" maxOccurs="unbounded" name="fieldsToNull" nillable="true" type="string" />
@@ -75,7 +76,8 @@
                				<element minOccurs="0" name="UpdatedById" nillable="true" type="zns:ID"  />
                				<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime" />
 
-							<element minOccurs="0" name="EmployeeNumber__c" nillable="true" type="string" />
+							<element minOccurs="0" name="CurrentRepID__c" nillable="true" type="string" />
+							<element minOccurs="0" name="SoldRepID__c" nillable="true" type="string" />
 							<element minOccurs="0" name="CustomerID__c" nillable="true" type="string" />
 							<element minOccurs="0" name="Office__c" nillable="true" type="string" />
 							<element minOccurs="0" name="WriteOffFlag__c" nillable="true" type="string" /><!-- user-defined enum -->
@@ -469,6 +471,7 @@
 							<element minOccurs="0" name="PaypalType" nillable="true" type="string" />
 							<element minOccurs="0" name="Phone" nillable="true" type="string" />
 							<element minOccurs="0" name="SkipValidation" nillable="true" type="boolean" />
+							<element minOccurs="0" name="TokenId" nillable="true" type="string" />
 							<element minOccurs="0" name="TotalNumberOfErrorPayments" nillable="true" type="int"/>
 							<element minOccurs="0" name="TotalNumberOfProcessedPayments" nillable="true" type="int"/>
 							<element minOccurs="0" name="Type" nillable="true" type="string" />
@@ -534,6 +537,7 @@
 							<element minOccurs="0" name="Description" nillable="true" type="string" />
 							<element minOccurs="0" name="DiscountLevel" nillable="true" type="string" />
 							<element minOccurs="0" name="IncludedUnits" nillable="true" type="decimal" />
+							<element minOccurs="0" name="LegacyRevenueReporting" nillable="true" type="boolean" />
 							<element minOccurs="0" name="MaxQuantity" nillable="true" type="decimal"  />
 							<element minOccurs="0" name="MinQuantity" nillable="true" type="decimal"  />
 							<element minOccurs="0" name="Name" nillable="true" type="string" />
@@ -718,6 +722,8 @@
 							<element minOccurs="0" name="Version" nillable="true" type="int" />
 
 							<element minOccurs="0" name="CampaignId__c" nillable="true" type="string" />
+							<element minOccurs="0" name="SoldRepId__c" nillable="true" type="string" />
+							<element minOccurs="0" name="Renewal__c" nillable="true" type="string" /><!-- user-defined enum -->
 						</sequence>
 					</extension>
 				</complexContent>
@@ -784,6 +790,7 @@
 		      			 <element minOccurs="0" name="AccountingCode" nillable="true" type="string"  />
 		      			 <element minOccurs="0" name="AdjustmentDate" nillable="true" type="dateTime"/>
 		      			 <element minOccurs="0" name="Amount" nillable="true" type="decimal"/>
+		      			 <element minOccurs="0" name="CancelledOn" nillable="true" type="dateTime"/>
 		      			 <element minOccurs="0" name="Comment" nillable="true" type="string"/>
 		      			 <element minOccurs="0" name="CreatedById" nillable="true" type="zns:ID"/>
 		      			 <element minOccurs="0" name="CreatedDate" nillable="true" type="dateTime"/>
@@ -798,7 +805,6 @@
 		      			 <element minOccurs="0" name="Type" nillable="true" type="string"/>
 		      			 <element minOccurs="0" name="UpdatedById" nillable="true" type="zns:ID"/>
 		      			 <element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime"/>
-		      			 <element minOccurs="0" name="CancelledOn" nillable="true" type="dateTime"/>
 	                 </sequence>
 	            </extension>
 	           </complexContent>
@@ -840,6 +846,7 @@
 		  </complexType>
    		</schema>
 		<schema attributeFormDefault="qualified" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://api.zuora.com/">
+		<import namespace="http://object.api.zuora.com/" />
 			<simpleType name="ID">
 				<restriction base="xs:string">
 					<pattern value='[a-zA-Z0-9]{32}|\d+' />
@@ -872,6 +879,7 @@
 			</complexType>			
 			<complexType name="SubscribeInvoiceProcessingOptions">
 			    <sequence>
+			        <element minOccurs="0" name="InvoiceDate" nillable="true" type="dateTime" />
 			        <element minOccurs="0" name="InvoiceProcessingScope" nillable="true" type="xs:string" />
 			        <element minOccurs="0" name="InvoiceTargetDate" nillable="true" type="dateTime" />
 			    </sequence>
@@ -938,6 +946,8 @@
 					<element minOccurs="0" name="SubscriptionId" nillable="true" type="zns:ID" />
 					<element minOccurs="0" name="SubscriptionNumber" nillable="true" type="string" />
 					<element minOccurs="0" maxOccurs="1" name="Success" type="boolean" />
+					<element minOccurs="0" name="TotalMrr" nillable="true" type="decimal" />
+					<element minOccurs="0" name="TotalTcv" nillable="true" type="decimal" />
 				</sequence>
 			</complexType>
 			<complexType name="SaveResult">
@@ -1183,6 +1193,7 @@
                    	</element>
 				<complexType name="InvoiceProcessingOptions">
 				    <sequence>
+			        	<element minOccurs="0" name="InvoiceDate" nillable="true" type="dateTime" />
 				        <element minOccurs="0" name="InvoiceTargetDate" nillable="true" type="dateTime" />
 				    </sequence>
 				</complexType>
@@ -1220,6 +1231,8 @@
 						<element minOccurs="0" name="PaymentTransactionNumber" nillable="true" type="string" />
 						<element minOccurs="0" name="SubscriptionId" nillable="true" type="zns:ID" />
 						<element minOccurs="0" maxOccurs="1" name="Success" type="boolean" />
+						<element minOccurs="0" name="TotalDeltaMrr" nillable="true" type="decimal" />
+						<element minOccurs="0" name="TotalDeltaTcv" nillable="true" type="decimal" />
 					</sequence>
 				</complexType>
 				<element name="amendResponse">
@@ -1240,6 +1253,7 @@
 				</complexType>
 		</schema>
 		<schema attributeFormDefault="qualified" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fault.api.zuora.com/">
+		    <import namespace="http://api.zuora.com/" />
 			<complexType name="ApiFault">
 				<sequence>
 					<element minOccurs="0" name="FaultCode" nillable="true" type="zns:ErrorCode" />
@@ -1599,7 +1613,7 @@
 	</binding>
 	<service name="ZuoraService">
 		<port name="Soap" binding="zns:SoapBinding">
-			<soap:address location="https://apisandbox.zuora.com/apps/services/a/47.1" />
+			<soap:address location="https://apisandbox.zuora.com/apps/services/a/49.0" />
 		</port>
 	</service>
 </definitions>
