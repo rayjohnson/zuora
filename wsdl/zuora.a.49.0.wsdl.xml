@@ -724,6 +724,7 @@
 							<element minOccurs="0" name="CampaignId__c" nillable="true" type="string" />
 							<element minOccurs="0" name="SoldRepId__c" nillable="true" type="string" />
 							<element minOccurs="0" name="Renewal__c" nillable="true" type="string" /><!-- user-defined enum -->
+							<element minOccurs="0" name="Cancel_Reason__c" nillable="true" type="string" />
 						</sequence>
 					</extension>
 				</complexContent>
