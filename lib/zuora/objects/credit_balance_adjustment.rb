@@ -14,7 +14,7 @@ module Zuora::Objects
     validates_inclusion_of :type, :in => %w(Increase Decrease)
 
     define_attributes do
-      read_only :created_by_id, :created_date, :updated_by_id, :updated_date
+      read_only :created_by_id, :created_date, :updated_by_id, :updated_date, :status
     end
   end
 end
