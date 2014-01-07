@@ -12,9 +12,11 @@ module Zuora::Objects
     validates_length_of :source_transaction_number, :maximum => 50, :if => Proc.new { |c| c.source_transaction_type == 'Adjustment' && !c.source_transaction }
     validates_inclusion_of :transferred_to_accounting, :in => %w(Processing Yes Error Ignore), :allow_nil => true
     validates_inclusion_of :type, :in => %w(Increase Decrease)
+    validates_inclusion_of :status, :in => ['Processed','Canceled'], :allow_nil => true
+
 
     define_attributes do
-      read_only :created_by_id, :created_date, :updated_by_id, :updated_date, :status
+      read_only :created_by_id, :created_date, :updated_by_id, :updated_date
     end
   end
 end
