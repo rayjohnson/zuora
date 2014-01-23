@@ -15,7 +15,6 @@ module Zuora
     HTTPI.log = opts[:logger] ? true : false
     Savon.configure do |savon|
       savon.logger = opts[:logger]
-      savon.log = opts[:logger] ? true : false
     end
 
     if Api.instance.config.sandbox
