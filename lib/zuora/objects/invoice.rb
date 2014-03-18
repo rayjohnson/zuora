@@ -47,11 +47,9 @@ module Zuora::Objects
         :updated_by_id,
         :updated_date
       )
-      defaults(
-        #:includes_one_time => true,
-        #:includes_recurring => true,
-        #:includes_usage => true,
-        #:invoice_date => Proc.new { Date.today }
+      defer(
+        :regenerate_invoice_pdf,
+        :body
       )
     end
 
