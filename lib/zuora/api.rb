@@ -37,7 +37,7 @@ module Zuora
     # @return [String]
     attr_reader :last_request
 
-    WSDL = File.expand_path('../../../wsdl/zuora.a.38.0.wsdl', __FILE__)
+    WSDL = File.expand_path('../../../wsdl/zuora.a.47.1.wsdl', __FILE__)
     SOAP_VERSION = 2
     SANDBOX_ENDPOINT = 'https://apisandbox.zuora.com/apps/services/a/38.0'
 
