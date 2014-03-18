@@ -9,3 +9,6 @@ doc
 gemfiles/*.gemfile.lock
 zuora.log
 Gemfile.lock
+.ruby-version
+.ruby-gemset
+.idea

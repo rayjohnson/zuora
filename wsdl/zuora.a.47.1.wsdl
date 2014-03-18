@@ -711,6 +711,11 @@
 			               	<element minOccurs="0" name="UpdatedById" nillable="true" type="zns:ID"  />
 			               	<element minOccurs="0" name="UpdatedDate" nillable="true" type="dateTime"  />
 							<element minOccurs="0" name="Version" nillable="true" type="int" />
+<<<<<<< HEAD:wsdl/zuora.a.47.1.wsdl
+=======
+							<element minOccurs="0" name="InvoiceOwnerId" nillable="true" type="zns:ID" />							 
+                                                        <element minOccurs="0" name="TermId__c" nillable="true" type="string" />
+>>>>>>> evanlok-master:wsdl/zuora.a.38.0.wsdl
 						</sequence>
 					</extension>
 				</complexContent>
