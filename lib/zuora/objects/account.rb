@@ -21,12 +21,12 @@ module Zuora::Objects
                 :parent_id, :total_invoice_balance, :updated_date,
                 :created_by_id, :last_invoice_date, :updated_by_id
 
-      defaults :auto_pay => false,
-               :currency => 'USD',
-               :batch => 'Batch1',
-               :bill_cycle_day => 1,
-               :status => 'Draft',
-               :payment_term => 'Due Upon Receipt'
+      #defaults :auto_pay => false,
+      #         :currency => 'USD',
+      #         :batch => 'Batch1',
+      #         :bill_cycle_day => 1,
+      #         :status => 'Draft',
+      #         :payment_term => 'Due Upon Receipt'
     end
   end
 end

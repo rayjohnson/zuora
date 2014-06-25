@@ -12,7 +12,7 @@ module Zuora::Objects
     validate do |request|
       self.validation_errors = Array.new
       self.validation_errors << request.must_be_present(:amendment)
-      self.validation_errors << request.must_be_present(:plans_and_charges) unless amendment.type == "TermsAndConditions" || amendment.type == "Renewal"
+      self.validation_errors << request.must_be_present(:plans_and_charges) unless amendment.type == "TermsAndConditions" || amendment.type == "Renewal" || amendment.type == "Cancellation"
     end
 
     def must_be_present(ref)
@@ -72,26 +72,30 @@ module Zuora::Objects
 
     def generate_rate_plan_data(builder)
 
+	  if self.plans_and_charges != nil
       self.plans_and_charges.each do |pandc|
         rate_plan = pandc[:rate_plan]
         charges = pandc[:charges]
 
         builder.__send__(ons, :RatePlanData) do |rpd|
           rpd.__send__(zns, :RatePlan) do |rp|
-            rate_plan.to_hash.each do |k,v|
-              rp.__send__(ons, k.to_s.zuora_camelize.to_sym, v) unless v.nil?
+          	if amendment.type == "NewProduct"
+            	rp.__send__(ons, :ProductRatePlanId, rate_plan.id)
+            else
+            	rp.__send__(ons, :AmendmentSubscriptionRatePlanId, rate_plan.id)
             end
           end
           charges.each do |charge|
             rpd.__send__(zns, :RatePlanChargeData) do |rpcd|
               rpcd.__send__(zns, :RatePlanCharge) do |rpc|
                 rpc.__send__(ons, :ProductRatePlanChargeId, charge.product_rate_plan_charge_id)
-                rpc.__send__(ons, :Quantity, charge.quantity)
+                rpc.__send__(ons, :Quantity, charge.quantity) unless charge.quantity.nil?
                 rpc.__send__(ons, :Price, charge.price) unless charge.price.nil?
               end
             end
           end unless charges == nil
         end
+      end
       end
     end
 
