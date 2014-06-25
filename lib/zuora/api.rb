@@ -13,6 +13,8 @@ module Zuora
     Api.instance.config = Config.new(opts)
     if Api.instance.config.sandbox
       Api.instance.sandbox!
+    else
+      Api.instance.production!
     end
   end
 
@@ -29,7 +31,7 @@ module Zuora
 
     # @return [Zuora::Config]
     attr_accessor :config
- 
+
     # @return Zuora::Api options
     attr_accessor :options
 
@@ -37,7 +39,8 @@ module Zuora
     # @return [String]
     attr_reader :last_request
 
-    WSDL = File.expand_path('../../../wsdl/zuora.a.47.1.wsdl', __FILE__)
+    # WSDL = File.expand_path('../../../wsdl/zuora.a.47.1.wsdl', __FILE__)
+    WSDL = File.expand_path('../../../wsdl/zuora.a.57.0.wsdl', __FILE__)
     SOAP_VERSION = 2
     SANDBOX_ENDPOINT = 'https://apisandbox.zuora.com/apps/services/a/38.0'
 
@@ -54,7 +57,21 @@ module Zuora
     # Change client to sandbox url
     def sandbox!
       @client = nil
-      self.class.instance.client.globals[:endpoint] = SANDBOX_ENDPOINT
+      # this is the source's change but instead taking Ray's change
+      # self.class.instance.client.globals[:endpoint] = SANDBOX_ENDPOINT
+      self.class.instance.client.wsdl.endpoint = "https://apisandbox.zuora.com/apps/services/a/57.0"
+    end
+
+    # Change client to production url
+    def production!
+      @client = nil
+      self.class.instance.client.wsdl.endpoint = "https://www.zuora.com/apps/services/a/57.0"
+    end
+
+    # The XML that was transmited in the last request
+    # @return [String]
+    def last_request
+      client.http.body
     end
 
     # Generate an API request with the given block.  The block yields an xml
