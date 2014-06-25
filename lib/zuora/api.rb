@@ -10,6 +10,9 @@ module Zuora
   # @param [Hash] configuration option hash
   # @return [Config]
   def self.configure(opts={})
+    HTTPI.logger = opts[:logger]
+    HTTPI.log = opts[:log] || false
+
     Api.instance.config = Config.new(opts)
     if Api.instance.config.sandbox
       Api.instance.sandbox!
@@ -42,7 +45,9 @@ module Zuora
     # WSDL = File.expand_path('../../../wsdl/zuora.a.47.1.wsdl', __FILE__)
     WSDL = File.expand_path('../../../wsdl/zuora.a.57.0.wsdl', __FILE__)
     SOAP_VERSION = 2
-    SANDBOX_ENDPOINT = 'https://apisandbox.zuora.com/apps/services/a/38.0'
+    # SANDBOX_ENDPOINT = 'https://apisandbox.zuora.com/apps/services/a/38.0'
+    SANDBOX_ENDPOINT = 'https://apisandbox.zuora.com/apps/services/a/57.0'
+    PRODUCTION_ENDPOINT = 'https://www.zuora.com/apps/services/a/57.0'
 
     def wsdl
       client.instance_variable_get(:@wsdl)
@@ -58,14 +63,15 @@ module Zuora
     def sandbox!
       @client = nil
       # this is the source's change but instead taking Ray's change
-      # self.class.instance.client.globals[:endpoint] = SANDBOX_ENDPOINT
-      self.class.instance.client.wsdl.endpoint = "https://apisandbox.zuora.com/apps/services/a/57.0"
+      self.class.instance.client.globals[:endpoint] = SANDBOX_ENDPOINT
+      # self.class.instance.client.wsdl.endpoint = "https://apisandbox.zuora.com/apps/services/a/57.0"
     end
 
     # Change client to production url
     def production!
       @client = nil
-      self.class.instance.client.wsdl.endpoint = "https://www.zuora.com/apps/services/a/57.0"
+      self.class.instance.client.globals[:endpoint] = PRODUCTION_ENDPOINT
+      # self.class.instance.client.wsdl.endpoint = "https://www.zuora.com/apps/services/a/57.0"
     end
 
     # The XML that was transmited in the last request
