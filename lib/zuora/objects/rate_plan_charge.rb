@@ -77,10 +77,11 @@ module Zuora::Objects
 
       defer :rollover_balance, :overage_price, :price, :included_units, :discount_amount, :discount_percentage
 
-      defaults(
-        :overage_calculation_option => 'EndOfSmoothingPeriod',
-        :overage_unused_units_credit_option => 'NoCredit'
-      )
+      # Don't set these defaults - they should not be in the SOAP message when doing updates
+      #defaults(
+      #  :overage_calculation_option => 'EndOfSmoothingPeriod',
+      #  :overage_unused_units_credit_option => 'NoCredit'
+      #)
     end
   end
 end
