@@ -687,7 +687,7 @@
 							<element minOccurs="0" name="ProductRatePlanChargeId" nillable="true" type="zns:ID" />
 							<element minOccurs="0" name="Quantity" nillable="true" type="decimal" />
 							<element minOccurs="0" name="RatePlanId" nillable="true" type="zns:ID" />
-							<element minOccurs="0" name="RevenueRecognitionRuleName" nillable="true" type="string" />
+							<!-- <element minOccurs="0" name="RevenueRecognitionRuleName" nillable="true" type="string" /> -->
 							<element minOccurs="0" name="RevRecCode" nillable="true" type="string"  />
 							<element minOccurs="0" name="RevRecTriggerCondition" nillable="true" type="string"  />
 							<element minOccurs="0" name="RolloverBalance" nillable="true" type="decimal" />
