@@ -90,6 +90,7 @@ module Zuora
     def request(method, options={}, &block)
       authenticate! unless authenticated?
 
+      options[:soap_header] = {'env:SessionHeader' => {'ins0:Session' => self.session.try(:key) }}
       if block_given?
         xml = Builder::XmlMarkup.new
         yield xml
