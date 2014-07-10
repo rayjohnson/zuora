@@ -92,9 +92,10 @@ module Zuora::Objects
                     rpcd.__send__(zns, :RatePlanCharge) do |rpc|
                       rpc.__send__(ons, :ProductRatePlanChargeId, charge.product_rate_plan_charge_id)
                       rpc.__send__(ons, :Quantity, charge.quantity)
-                      rpc.__send__(ons, :DiscountAmount, charge.discount_amount)
-                      rpc.__send__(ons, :DiscountPercentage, charge.discount_percentage)
-                      rpc.__send__(ons, :PriceIncreasePercentage, charge.price_increase_percentage)
+                      rpc.__send__(ons, :Price, charge.price) unless charge.price.nil?
+                      rpc.__send__(ons, :DiscountAmount, charge.discount_amount) unless charge.discount_amount.nil?
+                      rpc.__send__(ons, :DiscountPercentage, charge.discount_percentage) unless charge.discount_percentage.nil?
+                      rpc.__send__(ons, :PriceIncreasePercentage, charge.price_increase_percentage) unless charge.price_increase_percentage.nil?
                     end
                   end
                 end unless charges.nil?
