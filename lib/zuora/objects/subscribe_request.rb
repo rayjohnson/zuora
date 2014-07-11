@@ -62,13 +62,13 @@ module Zuora::Objects
             generate_bill_to_contact(btc)
           end unless bill_to_contact.nil?
 
-          s.__send__(zns, :SoldToContact) do |btc|
-            generate_sold_to_contact(btc)
-          end unless sold_to_contact.nil?
-
           s.__send__(zns, :PreviewOptions) do |so|
             generate_preview_options(so)
           end unless preview_options.blank?
+
+          s.__send__(zns, :SoldToContact) do |btc|
+            generate_sold_to_contact(btc)
+          end unless sold_to_contact.nil?
 
           s.__send__(zns, :SubscribeOptions) do |so|
             generate_subscribe_options(so)
